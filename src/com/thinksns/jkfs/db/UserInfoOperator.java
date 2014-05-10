@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.thinksns.jkfs.bean.UserInfoBean;
+import com.thinksns.jkfs.bean.UserInfoListBean;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -69,7 +70,8 @@ public class UserInfoOperator {
 	 * 
 	 * @return
 	 */
-	public static List<UserInfoBean> getUserInfoList() {
+	public static UserInfoListBean getUserInfoList() {
+		UserInfoListBean uilb = new UserInfoListBean();
 		List<UserInfoBean> userInfoList = new ArrayList<UserInfoBean>();
 		String sql = "select * from " + TABLE_NAME;
 		Cursor c = getWdb().rawQuery(sql, null);
@@ -84,7 +86,8 @@ public class UserInfoOperator {
 			uib.setAvatar_url(c.getString(c.getColumnIndex(AVATAR_URL)));
 			userInfoList.add(uib);
 		}
-		return userInfoList;
+		uilb.setUsers(userInfoList);
+		return uilb;
 	}
 
 }
