@@ -20,11 +20,12 @@ public class DBHelper extends SQLiteOpenHelper {
 			+ AccountOperator.OAUTH_TOKEN_SECRET + " text," + ");";
 
 	static final String CREATE_USER_INFO_TABLE_SQL = "create table "
-			+ UserInfoOperator.TABLE_NAME + "(" + UserInfoOperator.UID
-			+ " text primary key," + UserInfoOperator.UNAME + " text,"
-			+ UserInfoOperator.EMAIL + " text," + UserInfoOperator.SEX + " text,"
-			+ UserInfoOperator.PROVINCE + " text," + UserInfoOperator.CITY + " text,"
-			+ UserInfoOperator.AVATAR_URL + " text," + ");";
+			+ UserInfoOperator.TABLE_NAME + "(" + UserInfoOperator.ID
+			+ " text primary key autoincrement," + UserInfoOperator.UID + "text,"
+			+ UserInfoOperator.UNAME + " text," + UserInfoOperator.EMAIL
+			+ " text," + UserInfoOperator.SEX + " text,"
+			+ UserInfoOperator.PROVINCE + " text," + UserInfoOperator.CITY
+			+ " text," + UserInfoOperator.AVATAR_URL + " text," + ");";
 
 	public DBHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);

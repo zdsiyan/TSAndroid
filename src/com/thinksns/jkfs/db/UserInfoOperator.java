@@ -1,5 +1,12 @@
 package com.thinksns.jkfs.db;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.thinksns.jkfs.bean.UserInfoBean;
+
+import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 /**
@@ -10,6 +17,7 @@ import android.database.sqlite.SQLiteDatabase;
  */
 public class UserInfoOperator {
 	public static final String TABLE_NAME = "user_info_table";
+	public static final String ID = "_id";
 	public static final String UID = "uid";
 	public static final String UNAME = "uname";
 	public static final String EMAIL = "email";
@@ -32,12 +40,51 @@ public class UserInfoOperator {
 		return databaseHelper.getReadableDatabase();
 	}
 
-	private static void add() {
-
+	/**
+	 * 添加/更新用户资料
+	 * 
+	 * @param userInfo
+	 */
+	public static void addOrUpdate(UserInfoBean userInfo) {
+		ContentValues cv = new ContentValues();
+		cv.put(UID, userInfo.getUid());
+		cv.put(UNAME, userInfo.getUname());
+		cv.put(EMAIL, userInfo.getEmail());
+		cv.put(SEX, userInfo.getSex());
+		cv.put(PROVINCE, userInfo.getProvince());
+		cv.put(CITY, userInfo.getCity());
+		cv.put(AVATAR_URL, userInfo.getAvatar_url());
+		Cursor c = getWdb().query(TABLE_NAME, null, UID + "=?",
+				new String[] { userInfo.getUid() }, null, null, null);
+		if (c != null && c.getCount() > 0) {
+			getWdb().update(TABLE_NAME, cv, UID + "=?",
+					new String[] { userInfo.getUid() });
+		} else {
+			getWdb().insert(TABLE_NAME, UID, cv);
+		}
 	}
 
-	private static void update() {
-
+	/**
+	 * 返回用户信息列表
+	 * 
+	 * @return
+	 */
+	public static List<UserInfoBean> getUserInfoList() {
+		List<UserInfoBean> userInfoList = new ArrayList<UserInfoBean>();
+		String sql = "select * from " + TABLE_NAME;
+		Cursor c = getWdb().rawQuery(sql, null);
+		while (c.moveToNext()) {
+			UserInfoBean uib = new UserInfoBean();
+			uib.setUid(c.getString(c.getColumnIndex(UID)));
+			uib.setUname(c.getString(c.getColumnIndex(UNAME)));
+			uib.setEmail(c.getString(c.getColumnIndex(EMAIL)));
+			uib.setSex(c.getString(c.getColumnIndex(SEX)));
+			uib.setProvince(c.getString(c.getColumnIndex(PROVINCE)));
+			uib.setCity(c.getString(c.getColumnIndex(CITY)));
+			uib.setAvatar_url(c.getString(c.getColumnIndex(AVATAR_URL)));
+			userInfoList.add(uib);
+		}
+		return userInfoList;
 	}
 
 }
