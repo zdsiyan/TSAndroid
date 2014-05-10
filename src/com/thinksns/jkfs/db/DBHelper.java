@@ -5,7 +5,6 @@ import com.thinksns.jkfs.support.util.ThinkSNSApplication;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -16,16 +15,16 @@ public class DBHelper extends SQLiteOpenHelper {
 	private static final int DATABASE_VERSION = 1;
 
 	static final String CREATE_ACCOUNT_TABLE_SQL = "create table "
-			+ AccountTable.TABLE_NAME + "(" + AccountTable.UID
-			+ " text primary key," + AccountTable.OAUTH_TOKEN + " text,"
-			+ AccountTable.OAUTH_TOKEN_SECRET + " text," + ");";
+			+ AccountOperator.TABLE_NAME + "(" + AccountOperator.UID
+			+ " text primary key," + AccountOperator.OAUTH_TOKEN + " text,"
+			+ AccountOperator.OAUTH_TOKEN_SECRET + " text," + ");";
 
 	static final String CREATE_USER_INFO_TABLE_SQL = "create table "
-			+ UserInfoTable.TABLE_NAME + "(" + UserInfoTable.UID
-			+ " text primary key," + UserInfoTable.UNAME + " text,"
-			+ UserInfoTable.EMAIL + " text," + UserInfoTable.SEX + " text,"
-			+ UserInfoTable.PROVINCE + " text," + UserInfoTable.CITY + " text,"
-			+ UserInfoTable.AVATAR_URL + " text," + ");";
+			+ UserInfoOperator.TABLE_NAME + "(" + UserInfoOperator.UID
+			+ " text primary key," + UserInfoOperator.UNAME + " text,"
+			+ UserInfoOperator.EMAIL + " text," + UserInfoOperator.SEX + " text,"
+			+ UserInfoOperator.PROVINCE + " text," + UserInfoOperator.CITY + " text,"
+			+ UserInfoOperator.AVATAR_URL + " text," + ");";
 
 	public DBHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);

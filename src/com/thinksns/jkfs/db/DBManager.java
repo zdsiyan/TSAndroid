@@ -5,9 +5,9 @@ import android.database.sqlite.SQLiteDatabase;
 public class DBManager {
 	private static DBManager singleton = null;
 
-	private SQLiteDatabase wsd = null;
+	private SQLiteDatabase wdb = null;
 
-	private SQLiteDatabase rsd = null;
+	private SQLiteDatabase rdb = null;
 
 	private DBHelper databaseHelper = null;
 
@@ -19,12 +19,12 @@ public class DBManager {
 
 		if (singleton == null) {
 			DBHelper databaseHelper = DBHelper.getInstance();
-			SQLiteDatabase wsd = databaseHelper.getWritableDatabase();
-			SQLiteDatabase rsd = databaseHelper.getReadableDatabase();
+			SQLiteDatabase wdb = databaseHelper.getWritableDatabase();
+			SQLiteDatabase rdb = databaseHelper.getReadableDatabase();
 
 			singleton = new DBManager();
-			singleton.wsd = wsd;
-			singleton.rsd = rsd;
+			singleton.wdb = wdb;
+			singleton.rdb = rdb;
 			singleton.databaseHelper = databaseHelper;
 		}
 
