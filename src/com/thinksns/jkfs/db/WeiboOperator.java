@@ -43,7 +43,7 @@ public class WeiboOperator {
 	}
 
 	/**
-	 * 保存接收到的微博列表
+	 * 保存接收到的微博列表  （做标记，以避免重复存储？）
 	 * 
 	 * @param weiboList
 	 */
